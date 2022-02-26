@@ -4,7 +4,7 @@ namespace BurrowsWheelerTransform
 {
     class Program
     {
-        private static string BurrowsWheelerTransform(string originalString, ref int number)
+        private static string BurrowsWheelerTransform(string originalString, ref int index)
         {
             string[] tableOfStrings = new string[originalString.Length];
             for (int i = 0; i < originalString.Length; i++)
@@ -21,16 +21,38 @@ namespace BurrowsWheelerTransform
                 resultString += tableOfStrings[i][originalString.Length - 1];
                 if (string.Compare(tableOfStrings[i], originalString) == 0)
                 {
-                    number = i;
+                    index = i;
                 }
             }
             return resultString;
         }
+        private static string InverseBurrowsWheelerTransform(string resultString, int index)
+        {
+            string[] tableOfString = new string[resultString.Length];
+            for (int i = 0; i < tableOfString.Length; i++)
+            {
+                for (int j = 0; j < tableOfString.Length; j++)
+                {
+                    tableOfString[j] = resultString[j] + tableOfString[j];
+                }
+                Array.Sort(tableOfString);
+            }
+            return tableOfString[index];
+        }
         static void Main(string[] args)
         {
             int number = 0;
-            Console.WriteLine("{0} {1}", BurrowsWheelerTransform("abcdef", ref number), number);
-            //Console.WriteLine(number);
+            Console.WriteLine("Введите исходную строку: ");
+            var inputString = Console.ReadLine();
+            if (inputString == null)
+            {
+                return;
+            }
+            Console.WriteLine("Строка после прямого преобразования: ");
+            string stringAfterDirectTransform = BurrowsWheelerTransform(inputString, ref number);
+            Console.WriteLine(stringAfterDirectTransform, number);
+            Console.WriteLine("Строка после обратного преобразования: ");
+            Console.WriteLine(InverseBurrowsWheelerTransform(stringAfterDirectTransform, number));
         }
     }
 }
