@@ -96,6 +96,23 @@ public class Bor
         return true;
     }
 
+    public int HowManyStartsWithPrefix(string prefix)
+    {
+        Node current = root;
+        for (int i = 0; i < prefix.Length; i++)
+        {
+            var symbol = prefix[i];
+            if (current != null)
+            {
+                current = current.next[symbol - 'a'];
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        return current.countStringsContainPrefix;
+    }
     static void Main(string[] args)
     {
         Bor bor = new Bor();
