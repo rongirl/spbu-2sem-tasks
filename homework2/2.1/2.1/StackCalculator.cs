@@ -29,7 +29,7 @@ namespace _2._1
                 stack.Push(operandTwo / operandOne);
             }
         }
-        public static (bool, double) Calculate(string postfixExpression, IStack stack)
+        public static double Calculate(string postfixExpression, IStack stack)
         {
             string number = "";
             for (int i = 0; i < postfixExpression.Length; i++)
@@ -59,31 +59,35 @@ namespace _2._1
                     {   
                         if (stack.IsEmpty())
                         {
-                            return (false, 0);
+                            throw new Exception("Ошибка");
                         }
                         double head = stack.Pop();
-                        if (stack.IsEmpty() || (postfixExpression[i] == '/' && head.CompareTo(0) == 0))
+                        if (stack.IsEmpty())
                         {
-                            return (false, 0);
+                            throw new Exception("Ошибка");
+                        }    
+                        if (postfixExpression[i] == '/' && head.CompareTo(0) == 0)
+                        {
+                            throw new DivideByZeroException("Деление на ноль");
                         }
                         stack.Push(head);
                         PerformOperation(stack, postfixExpression[i]);
                         break;
                     }
                     default:
-                        return (false, 0);
+                        throw new Exception("Ошибка");
                 }
             }
             if (stack.IsEmpty())
             {
-                return (false, 0);
+                throw new Exception("Ошибка");
             }
             var result = stack.Pop();
             if (stack.IsEmpty())
             {
-                return (true, result);
+                return result;
             }
-            return (false, 0);
+            throw new Exception("Ошибка");
         }
     }
 }

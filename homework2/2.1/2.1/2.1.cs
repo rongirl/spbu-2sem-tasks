@@ -10,12 +10,42 @@ namespace _2._1
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("0 - стек на массиве\n1 - стек на списке");
+            var symbol = Console.ReadLine();
+            if (symbol == null)
+            {
+                Console.WriteLine(":(");
+                return;
+            }
+            if (!int.TryParse(symbol, out int number))
+            {
+                Console.WriteLine("Неверный ввод");
+                return;
+            }
+            IStack stack;
+            if (number == 0)
+            {
+                stack = new StackArray();
+            }
+            else if (number == 1)
+            {
+                stack = new StackList();
+            }
+            else
+            {
+                stack = null;
+            }
+            if (stack == null)
+            {
+                return;
+            }
+            Console.WriteLine("Введите выражение в постфиксной записи: ");
             var inputString = Console.ReadLine();
             if (inputString == null)
             {
                 return;
             }
-            IStack stack = new StackList();
+            Console.WriteLine("Результат вычисления: ");
             Console.WriteLine(StackCalculator.Calculate(inputString, stack));
         }
     }
