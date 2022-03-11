@@ -113,10 +113,13 @@ public class Bor
         }
         return current.countStringsContainPrefix;
     }
+
+    public int Size()
+    {
+        return size;
+    }
     static void Main(string[] args)
     {
-        Bor bor = new Bor();
-        bor.Add("mik");
-        bor.Remove("mik");
+
     }
 }
