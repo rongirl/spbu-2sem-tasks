@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 
 namespace _2._1
 {
-    internal interface IStack
+    public interface IStack
     {
-        void Push(int value);
+        void Push(double value);
 
-        int Pop();
+        double Pop();
 
         bool IsEmpty();
-
-        void DeleteStack();
     }
 }
