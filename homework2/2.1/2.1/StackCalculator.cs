@@ -8,54 +8,48 @@ namespace _2._1
 {  
     public class StackCalculator
     {
-        private static void PerformOperation(IStack stack, char symbol)
+        private static void PerformOperation(IStack stack, string symbol)
         {
             var operandOne = stack.Pop();
             var operandTwo = stack.Pop();
-            if (symbol == '+')
+            if (symbol == "+")
             {
                 stack.Push(operandOne + operandTwo);
             }
-            else if (symbol == '-')
+            else if (symbol == "-")
             {
                 stack.Push(operandTwo - operandOne);
             }
-            else if (symbol == '*')
+            else if (symbol == "*")
             {
                 stack.Push(operandTwo * operandOne);
             }
-            else if (symbol == '/')
+            else if (symbol == "/")
             {
                 stack.Push(operandTwo / operandOne);
             }
         }
         public static double Calculate(string postfixExpression, IStack stack)
         {
-            string number = "";
-            for (int i = 0; i < postfixExpression.Length; i++)
+            int number = 0;
+            var strings = postfixExpression.Split();
+            foreach (var element in strings)
             {   
-                
-                if (Char.IsDigit(postfixExpression[i]))
+                if (int.TryParse(element, out number))
                 {
-                    number = string.Concat(number, char.ToString(postfixExpression[i]));
+                    stack.Push(number);
                     continue;
                 }
-                if (number.Length > 0)
-                {
-                    stack.Push(int.Parse(number));
-                    number = "";
-                    continue;
-                }
-                if (postfixExpression[i] == ' ')
+                if (element == "")
                 {
                     continue;
                 }
-                switch (postfixExpression[i])
+                switch (element)
                 {   
-                    case '+':
-                    case '-':
-                    case '*':
-                    case '/':
+                    case "+":
+                    case "-":
+                    case "*":
+                    case "/":
                     {   
                         if (stack.IsEmpty())
                         {
@@ -66,12 +60,12 @@ namespace _2._1
                         {
                             throw new InvalidOperationException("Ошибка");
                         }    
-                        if (postfixExpression[i] == '/' && head.CompareTo(0) == 0)
+                        if (element == "/" && head.CompareTo(0) == 0)
                         {
                             throw new DivideByZeroException("Деление на ноль");
                         }
                         stack.Push(head);
-                        PerformOperation(stack, postfixExpression[i]);
+                        PerformOperation(stack, element);
                         break;
                     }
                     default:
