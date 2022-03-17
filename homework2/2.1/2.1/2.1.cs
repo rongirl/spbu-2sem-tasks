@@ -33,10 +33,6 @@ namespace _2._1
             }
             else
             {
-                stack = null;
-            }
-            if (stack == null)
-            {
                 return;
             }
             Console.WriteLine("Введите выражение в постфиксной записи: ");

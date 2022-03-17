@@ -59,12 +59,12 @@ namespace _2._1
                     {   
                         if (stack.IsEmpty())
                         {
-                            throw new Exception("Ошибка");
+                            throw new InvalidOperationException("Ошибка");
                         }
                         double head = stack.Pop();
                         if (stack.IsEmpty())
                         {
-                            throw new Exception("Ошибка");
+                            throw new InvalidOperationException("Ошибка");
                         }    
                         if (postfixExpression[i] == '/' && head.CompareTo(0) == 0)
                         {
@@ -75,19 +75,19 @@ namespace _2._1
                         break;
                     }
                     default:
-                        throw new Exception("Ошибка");
+                        throw new InvalidOperationException("Ошибка");
                 }
             }
             if (stack.IsEmpty())
             {
-                throw new Exception("Ошибка");
+                throw new InvalidOperationException("Ошибка");
             }
             var result = stack.Pop();
             if (stack.IsEmpty())
             {
                 return result;
             }
-            throw new Exception("Ошибка");
+            throw new InvalidOperationException("Ошибка");
         }
     }
 }
