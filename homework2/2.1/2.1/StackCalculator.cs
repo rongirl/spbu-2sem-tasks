@@ -5,89 +5,83 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace _2._1
-{  
+{
     public class StackCalculator
     {
-        private static void PerformOperation(IStack stack, char symbol)
+        private static void PerformOperation(IStack stack, string symbol)
         {
             var operandOne = stack.Pop();
             var operandTwo = stack.Pop();
-            if (symbol == '+')
+            if (symbol == "+")
             {
                 stack.Push(operandOne + operandTwo);
             }
-            else if (symbol == '-')
+            else if (symbol == "-")
             {
                 stack.Push(operandTwo - operandOne);
             }
-            else if (symbol == '*')
+            else if (symbol == "*")
             {
                 stack.Push(operandTwo * operandOne);
             }
-            else if (symbol == '/')
+            else if (symbol == "/")
             {
                 stack.Push(operandTwo / operandOne);
             }
         }
         public static double Calculate(string postfixExpression, IStack stack)
         {
-            string number = "";
-            for (int i = 0; i < postfixExpression.Length; i++)
-            {   
-                
-                if (Char.IsDigit(postfixExpression[i]))
+            int number = 0;
+            var strings = postfixExpression.Split();
+            foreach (var element in strings)
+            {
+                if (int.TryParse(element, out number))
                 {
-                    number = string.Concat(number, char.ToString(postfixExpression[i]));
+                    stack.Push(number);
                     continue;
                 }
-                if (number.Length > 0)
-                {
-                    stack.Push(int.Parse(number));
-                    number = "";
-                    continue;
-                }
-                if (postfixExpression[i] == ' ')
+                if (element == "")
                 {
                     continue;
                 }
-                switch (postfixExpression[i])
-                {   
-                    case '+':
-                    case '-':
-                    case '*':
-                    case '/':
-                    {   
-                        if (stack.IsEmpty())
+                switch (element)
+                {
+                    case "+":
+                    case "-":
+                    case "*":
+                    case "/":
                         {
-                            throw new Exception("Ошибка");
+                            if (stack.IsEmpty())
+                            {
+                                throw new InvalidOperationException("Ошибка");
+                            }
+                            double head = stack.Pop();
+                            if (stack.IsEmpty())
+                            {
+                                throw new InvalidOperationException("Ошибка");
+                            }
+                            if (element == "/" && head.CompareTo(0) == 0)
+                            {
+                                throw new DivideByZeroException("Деление на ноль");
+                            }
+                            stack.Push(head);
+                            PerformOperation(stack, element);
+                            break;
                         }
-                        double head = stack.Pop();
-                        if (stack.IsEmpty())
-                        {
-                            throw new Exception("Ошибка");
-                        }    
-                        if (postfixExpression[i] == '/' && head.CompareTo(0) == 0)
-                        {
-                            throw new DivideByZeroException("Деление на ноль");
-                        }
-                        stack.Push(head);
-                        PerformOperation(stack, postfixExpression[i]);
-                        break;
-                    }
                     default:
-                        throw new Exception("Ошибка");
+                        throw new InvalidOperationException("Ошибка");
                 }
             }
             if (stack.IsEmpty())
             {
-                throw new Exception("Ошибка");
+                throw new InvalidOperationException("Ошибка");
             }
             var result = stack.Pop();
             if (stack.IsEmpty())
             {
                 return result;
             }
-            throw new Exception("Ошибка");
+            throw new InvalidOperationException("Ошибка");
         }
     }
 }
