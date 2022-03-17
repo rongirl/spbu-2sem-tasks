@@ -37,8 +37,14 @@ namespace StackCalculatorTest
             Assert.AreEqual(StackCalculator.Calculate("0 9 /", stack), 0);
         }
 
-        
-
-
+        [Test, TestCaseSource(nameof(Stacks))]
+        public void NegativeNumbers(IStack stack)
+        {
+            Assert.AreEqual(StackCalculator.Calculate("-10 2 * 5 / 4 +", stack), 0);
+            Assert.AreEqual(StackCalculator.Calculate("-6 -4 / -7 *", stack), -10.5);
+            Assert.AreEqual(StackCalculator.Calculate("0 -5 +", stack), -5);
+            Assert.AreEqual(StackCalculator.Calculate("0 -5 -", stack), 5);
+            Assert.AreEqual(StackCalculator.Calculate("-9 -9 /", stack), 1);
+        }
     }
 }
