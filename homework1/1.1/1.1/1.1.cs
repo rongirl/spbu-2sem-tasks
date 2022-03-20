@@ -1,46 +1,35 @@
-﻿namespace Sort
-{
-    public class SortClass
-    { 
-        public static int[] BubbleSort(int[] array)
+﻿namespace Sort;
+
+public static class Sort
+{ 
+    public static void BubbleSort(int[] array)
+    {
+        for (int i = 0; i < array.Length; i++)
         {
-            int temporary;
-            for (int i = 0; i < array.Length; i++)
+            for(int j = 0; j < array.Length - i - 1; j++)
             {
-                for(int j = i + 1; j < array.Length; j++)
+                if (array[j] > array[j + 1])
                 {
-                    if (array[i] > array[j])
-                    {
-                        temporary = array[i];
-                        array[i] = array[j];
-                        array[j] = temporary;
-                    }
+                    (array[j], array[j + 1]) = (array[j + 1], array[j]);
                 }
             }
-            return array;
         }
-        static void Main(string[] args)
+    }
+
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Введите массив чисел: ");
+        var strings = Console.ReadLine()?.Split();
+        if (strings == null)
         {
-            Console.WriteLine("Введите количество элементов массива:");
-            var inputString = Console.ReadLine();
-            if (inputString == null)
-            {
-                return;
-            }
-            int countOfElements = int.Parse(inputString);
-            int[] array = new int[countOfElements]; 
-            Console.WriteLine("Введите элементы массива:");
-            var numbers = Console.ReadLine().Split(new[] { " ", " ", " "}, StringSplitOptions.RemoveEmptyEntries);
-            for (int i = 0; i < array.Length; i++)
-            {
-                array[i] = Convert.ToInt32(numbers[i]);
-            }
-            BubbleSort(array);
-            Console.WriteLine("После сортировки:");
-            for (int i = 0; i < array.Length; i++)
-            {
-                Console.Write("{0} ",array[i]);
-            }
+            return;
+        }
+        int[] array = Array.ConvertAll(strings, int.Parse);
+        BubbleSort(array);
+        Console.WriteLine("После сортировки:");
+        for (int i = 0; i < array.Length; i++)
+        {
+            Console.Write($"{array[i]} ");
         }
     }
 }
