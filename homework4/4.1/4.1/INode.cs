@@ -10,5 +10,4 @@ public interface INode
     void Print();
 
     int Calculate();
-
 }
