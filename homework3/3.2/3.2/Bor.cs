@@ -92,7 +92,7 @@ public class Bor
             else
             {
                 var temporary = current.dictionary[(byte)symbol];
-                current.dictionary[(byte)symbol] = null;
+                current.dictionary.Remove((byte)symbol);
                 current = temporary;
 
             }
@@ -138,7 +138,7 @@ public class Bor
          return current.index;
      }
 
-  /*  static void Main(string[] args)
+     static void Main(string[] args)
     {
         Bor bor = new Bor();
         // string s = "C:/Users/Acer/source/repos/ConsoleApp1/text.txt";
@@ -148,15 +148,20 @@ public class Bor
         //     bor.Add(c);
         //}
 
-          bor.Add("he");
-          bor.Add("his");
-          bor.Add("she");
-          bor.Add("hers");
-          bor.Add("his")
-         bor.Add("so");
-         //bor.Contain("jhfijhifhdihf");
+         // bor.Add("he");
+          //bor.Add("his");
+         // bor.Add("she");
+          bor.Add("hers арвыалорвылоавлора");
+          bor.Add("se");
+        bor.Add("shes");
+        bor.HowManyStartsWithPrefix("she");
+          bor.Remove("she");
+          bor.Add("so");
+        bor.HowManyStartsWithPrefix("she");
+
+        //bor.Contain("jhfijhifhdihf");
         //bor.Index("Leo");
 
     }
-  */
+  
 }

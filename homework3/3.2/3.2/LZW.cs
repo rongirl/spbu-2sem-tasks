@@ -7,82 +7,83 @@ using BorSpace;
 
 namespace LZWSpace
 {
-    
-        public class Program
-        {
-        static void Main(string[] args)
-        {
-            Program lzw = new Program();
-            lzw.Compress("Euesque");
-           // Console.WriteLine(string.Join(", ", compressed));
-           // string decompressed = Decompress(compressed);
-           // Console.WriteLine(decompressed);
-        }
 
-        private Bor bor = new Bor();
-        public List<int> compressList = new List<int>();
-        public  void Compress(string uncompressed)
-            {
-                // build the dictionary
-                for (int i = 0; i < 256; i++)
-                    bor.Add("" + (char)i);
+    /*   public class Program
+       {
+       static void Main(string[] args)
+       {
+           Program lzw = new Program();
+           lzw.Compress("Euesque");
+          // Console.WriteLine(string.Join(", ", compressed));
+          // string decompressed = Decompress(compressed);
+          // Console.WriteLine(decompressed);
+       }
 
-                string w = string.Empty;
+       private Bor bor = new Bor();
+       public List<int> compressList = new List<int>();
+       public  void Compress(string uncompressed)
+           {
+               // build the dictionary
+               for (int i = 0; i < 256; i++)
+                   bor.Add("" + (char)i);
 
-                foreach (char c in uncompressed)
-                {
-                    string wc = w + c;
-                    if (bor.Contain(wc))
-                    {
-                        w = wc;
-                    }
-                    else
-                    {
-                        // write w to output
-                      //  compressList.Add(bor.dictionary[(byte)w]);// bor.Index(w);
-                        // wc is a new sequence; add it to the dictionary
-                       // dictionary.Add(wc, dictionary.Count);
-                       // w = c.ToString();
-                    }
-                }
+               string w = string.Empty;
 
-                // write remaining output if necessary
-                if (!string.IsNullOrEmpty(w))
-                    compressed.Add(dictionary[w]);
+               foreach (char c in uncompressed)
+               {
+                   string wc = w + c;
+                   if (bor.Contain(wc))
+                   {
+                       w = wc;
+                   }
+                   else
+                   {
+                       // write w to output
+                     //  compressList.Add(bor.dictionary[(byte)w]);// bor.Index(w);
+                       // wc is a new sequence; add it to the dictionary
+                      // dictionary.Add(wc, dictionary.Count);
+                      // w = c.ToString();
+                   }
+               }
 
-                return compressed;
-            }
+               // write remaining output if necessary
+             // if (!string.IsNullOrEmpty(w))
+              //     compressed.Add(dictionary[w]);
 
-            public static string Decompress(List<int> compressed)
-            {
-                // build the dictionary
-                Dictionary<int, string> dictionary = new Dictionary<int, string>();
-                for (int i = 0; i < 256; i++)
-                    dictionary.Add(i, ((char)i).ToString());
+               return compressed;
+           }
 
-                string w = dictionary[compressed[0]];
-                compressed.RemoveAt(0);
-                StringBuilder decompressed = new StringBuilder(w);
+           public static string Decompress(List<int> compressed)
+           {
+               // build the dictionary
+               Dictionary<int, string> dictionary = new Dictionary<int, string>();
+               for (int i = 0; i < 256; i++)
+                   dictionary.Add(i, ((char)i).ToString());
 
-                foreach (int k in compressed)
-                {
-                    string entry = null;
-                    if (dictionary.ContainsKey(k))
-                        entry = dictionary[k];
-                    else if (k == dictionary.Count)
-                        entry = w + w[0];
+               string w = dictionary[compressed[0]];
+               compressed.RemoveAt(0);
+               StringBuilder decompressed = new StringBuilder(w);
 
-                    decompressed.Append(entry);
+               foreach (int k in compressed)
+               {
+                   string entry = null;
+                   if (dictionary.ContainsKey(k))
+                       entry = dictionary[k];
+                   else if (k == dictionary.Count)
+                       entry = w + w[0];
 
-                    // new sequence; add it to the dictionary
-                    dictionary.Add(dictionary.Count, w + entry[0]);
+                   decompressed.Append(entry);
 
-                    w = entry;
-                }
+                   // new sequence; add it to the dictionary
+                   dictionary.Add(dictionary.Count, w + entry[0]);
 
-                return decompressed.ToString();
-            }
-        }
+                   w = entry;
+               }
+
+               return decompressed.ToString();
+           }
+       }
+}*/
 }
 
 
