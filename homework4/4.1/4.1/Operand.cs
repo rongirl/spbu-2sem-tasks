@@ -8,13 +8,13 @@ namespace _4._1;
 
 public class Operand : INode
 {
-    private int Value { get; set; }
+    public int value { get; set; }
 
     public void Print()
     {
-        Console.Write($"{Value}");
+        Console.Write($"{value} ");
     }
 
-    public int Calculate() => Value;
+    public int Calculate() => value;
 }
 
