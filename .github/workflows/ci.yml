@@ -9,6 +9,6 @@ jobs:
               with:
                 dotnet-version: '6.x'
             - name: Build
-              run: 
+              run: dotnet build 
             - name: Run tests
-              run: 
+              run: dotnet test
