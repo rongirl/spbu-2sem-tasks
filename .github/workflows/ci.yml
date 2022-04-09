@@ -9,6 +9,6 @@ jobs:
               with:
                 dotnet-version: '6.x'
             - name: Build
-              run: dotnet build 
+              run: foreach($file in (dir -Path ./ -Filter *.sln -Recurse | %{$_.FullName})) { dotnet test $file }
             - name: Run tests
-              run: dotnet test
+              run: foreach($file in (dir -Path ./ -Filter *.sln -Recurse | %{$_.FullName})) { dotnet build $file }
