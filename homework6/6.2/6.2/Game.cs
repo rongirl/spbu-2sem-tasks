@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _6._2
+namespace _6._2;
+
+public class Game
 {
-    internal class Game
-    {
-    }
 }
