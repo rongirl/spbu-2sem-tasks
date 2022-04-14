@@ -6,8 +6,14 @@ using System.Threading.Tasks;
 
 namespace Task6_2;
 
-public class Game
+public class Map
 {
+    public List<List<char>> walls;
+
+    public void jjjkj() 
+    { 
+        walls = new List<List<char>>();
+    }
+
     
 }
-
