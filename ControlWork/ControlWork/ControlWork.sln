@@ -5,7 +5,7 @@ VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlWork", "ControlWork\ControlWork.csproj", "{6B89CDFD-6084-41CA-99E1-B33C877B1067}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VectorTest", "VectorTest\VectorTest.csproj", "{812EB102-BBB3-4BEC-BD14-6F5719FA66D1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VectorTest1", "VectorTest1\VectorTest1.csproj", "{5C063601-8737-4D06-B5F9-B1AA2C4A24C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{6B89CDFD-6084-41CA-99E1-B33C877B1067}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B89CDFD-6084-41CA-99E1-B33C877B1067}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B89CDFD-6084-41CA-99E1-B33C877B1067}.Release|Any CPU.Build.0 = Release|Any CPU
-		{812EB102-BBB3-4BEC-BD14-6F5719FA66D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{812EB102-BBB3-4BEC-BD14-6F5719FA66D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{812EB102-BBB3-4BEC-BD14-6F5719FA66D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{812EB102-BBB3-4BEC-BD14-6F5719FA66D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C063601-8737-4D06-B5F9-B1AA2C4A24C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C063601-8737-4D06-B5F9-B1AA2C4A24C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C063601-8737-4D06-B5F9-B1AA2C4A24C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C063601-8737-4D06-B5F9-B1AA2C4A24C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
