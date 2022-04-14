@@ -18,6 +18,6 @@ namespace VectorTest;
             oneVector = oneVector.Inital("576 0 0");
             Vector twoVector = new Vector();
             twoVector = twoVector.Inital("1 1 1");
-            // Assert.AreEqual(Vector.ScalarTest();
+            //Assert.AreEqual(Vector.ScalarProduct(oneVector, twoVector), 576);
         }
     }

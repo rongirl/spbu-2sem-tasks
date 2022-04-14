@@ -29,6 +29,7 @@ public class Vector
     public Vector Inital(string vectorString)
     {   
         Vector vector  = new Vector();
+        vector.length = 0;
         int index = 0;
         for (int i = 0; i < vectorString.Length; i++)
         {   
@@ -113,7 +114,7 @@ public class Vector
         return resultVector;
     }
 
-   public int ScalarProduct(Vector oneVector, Vector twoVector)
+   public static int ScalarProduct(Vector oneVector, Vector twoVector)
     {   
         if (oneVector.length != twoVector.length)
         {
