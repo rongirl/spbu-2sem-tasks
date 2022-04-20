@@ -10,7 +10,6 @@ public class Program
 {
     static void Main(string[] args)
     {
-      
         try
         {
             var eventLoop = new EventLoop();
