@@ -94,7 +94,10 @@ public class Queue
         }
         return false;
     }
-
+    /// <summary>
+    /// Возвращает значение первого элемента
+    /// </summary>
+    /// <exception cref="InvalidOperationException">Если список пуст</exception>
     public object GetHeadValue()
     {
         if (IsEmpty())
@@ -103,7 +106,10 @@ public class Queue
         }
         return head.Value;
     }
-
+    /// <summary>
+    /// Возвращает приоритет первого элемента
+    /// </summary>
+    /// <exception cref="InvalidOperationException">Если список пуст</exception>
     public int GetHeadPriority()
     {
         if (IsEmpty())
@@ -115,11 +121,7 @@ public class Queue
 
     static void Main(string[] args)
     {
-        Queue queue = new Queue();
-        queue.Enqueue("a", 5);
-        queue.Enqueue("b", 5);
-        queue.Enqueue("c", 1000);
-        queue.Dequeue();    
+        
     }
 
 }

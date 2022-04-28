@@ -36,4 +36,21 @@ public class Tests
         queue.Enqueue(11, 11);
         Assert.False(queue.IsEmpty());
     }
+
+    [Test]
+    public void DequeueTest()
+    {
+        Queue queue = new Queue();
+        queue.Enqueue("aaa", 888);
+        queue.Dequeue();
+        Assert.IsTrue(queue.IsEmpty());
+        queue.Enqueue(2222, 2222);
+        Assert.AreEqual(queue.Dequeue(), 2222);
+        Assert.IsTrue(queue.IsEmpty());
+        queue.Enqueue("aaa", 888);
+        queue.Enqueue(2222, 2222);
+        queue.Dequeue();
+        Assert.IsFalse(queue.IsContain(2222));
+        Assert.IsTrue(queue.IsContain("aaa"));
+    }
 }
