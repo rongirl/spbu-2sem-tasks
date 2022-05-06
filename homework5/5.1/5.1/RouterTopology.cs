@@ -4,9 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _5._1
+namespace Task5_1;
+public class RouterTopology
 {
-    internal class RouterTopology
+    public Graph MakeTopology(string filePath)
     {
+        Graph graph = new Graph(filePath);
+        foreach (var node in graph.Nodes)
+        {
+
+        }
     }
 }
