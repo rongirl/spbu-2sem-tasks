@@ -18,9 +18,7 @@ public class Graph
     public Graph(string filePath)
     {
         Nodes = new List<Tuple<int, int, int>>();
-        CountNodes = 0;
         MatrixLength = 20;
-        CountEdges = 0;
         MaxNumberNode = 0;
         Matrix = new int[MatrixLength, MatrixLength];
         Parse(filePath);
@@ -28,7 +26,7 @@ public class Graph
 
     private void Parse(string filePath)
     {
-        using (StreamReader reader = new StreamReader("C:/Users/Acer/source/repos/spbu-2sem-tasks/homework5/5.1/5.1/Input.txt"))
+        using (StreamReader reader = new StreamReader(filePath))
         {
             while (!reader.EndOfStream)
             {
@@ -44,8 +42,6 @@ public class Graph
                     {
                         Resize();
                     }
-                    CountNodes += 2;
-                    CountEdges++;
                     int weightNode = int.Parse(lineParts[i+1].Split('(')[1].Split(")")[0]);
                     var node = new Tuple<int, int, int>(numberNode, currentNode, weightNode);
                     Nodes.Add(node);
@@ -101,9 +97,38 @@ public class Graph
         Matrix[node.Item1, node.Item2] = 0;
         Matrix[node.Item2, node.Item1] = 0;
     }
+   
+    public void PrintGraph(string filepath)
+    {   
+        using StreamWriter writer = new StreamWriter(filepath);
+        for (int i = 1; i <= MaxNumberNode; i++)
+        {
+            string line = "";
+            bool visited = false;
+            for (int j = i; j <= MaxNumberNode; j++)
+            {
+                if (Matrix[i, j] != 0)
+                {
+                    if (!visited)
+                    {
+                        line += i.ToString() + ":";
+                        visited = true;
+                    }
+                    line += ($" {j.ToString()}({Matrix[i, j].ToString()})");
+                }
+            }
+            if (line.Length != 0)
+            {
+                writer.WriteLine(line);
+            }
+        }
+
+    }
+
     static void Main(string[] args)
     {
-        Graph graph = new Graph();
-        graph.Parse("kkk");
+        RouterTopology topology  = new RouterTopology();
+        topology.MakeTopology("C:/Users/Acer/source/repos/spbu-2sem-tasks/homework5/5.1/5.1/Input.txt",
+           "C:/Users/Acer/source/repos/spbu-2sem-tasks/homework5/5.1/5.1/Output.txt");
     }
 }
