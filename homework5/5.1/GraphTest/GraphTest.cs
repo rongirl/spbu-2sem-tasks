@@ -5,7 +5,7 @@ namespace GraphTest;
 
 public class Tests
 {
-    private string filePath = "C:/Users/Acer/source/repos/spbu-2sem-tasks/homework5/5.1/GraphTest/InputTest.txt";
+    private string filePath = "homework5/5.1/GraphTest/InputTest.txt";
     [SetUp]
     public void Setup()
     {
@@ -15,7 +15,13 @@ public class Tests
     public void TestMatrixAfterParsing()
     {
         Graph graph = new Graph(filePath);
-        int[,] CorrectMatrix = { { 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 9, 5, 0, 0, 0 }, { 0, 9, 0, 1, 0, 0, 0 }, { 0, 5, 1, 0, 8, 0, 0 }, { 0, 0, 0, 8, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 7}, { 0, 0, 0, 0, 0, 7, 0} };
+        int[,] CorrectMatrix = { { 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 9, 5, 0, 0, 0 }, 
+            { 0, 9, 0, 1, 0, 0, 0 }, 
+            { 0, 5, 1, 0, 8, 0, 0 }, 
+            { 0, 0, 0, 8, 0, 0, 0 }, 
+            { 0, 0, 0, 0, 0, 0, 7},
+            { 0, 0, 0, 0, 0, 7, 0} };
         for (int i = 0; i < CorrectMatrix.GetLength(0); i++)
         {
             for (int j = 0; j < CorrectMatrix.GetLength(1); j++)
