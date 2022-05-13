@@ -5,7 +5,7 @@ namespace GraphTest;
 
 public class Tests
 {
-    private string filePath = "homework5/5.1/GraphTest/InputTest.txt";
+    private string filePath = "InputTest.txt";
     [SetUp]
     public void Setup()
     {

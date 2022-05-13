@@ -6,8 +6,8 @@ namespace RouterTopologyTest;
 
 public class Tests
 {
-    private string fileInputPath = "homework5/5.1/RouterTopologyTest/InputTest.txt";
-    private string fileOutputPath = "homework5/5.1/RouterTopologyTest/OutputTest.txt";
+    private string fileInputPath = "InputTest.txt";
+    private string fileOutputPath = "OutputTest.txt";
     [SetUp]
     public void Setup()
     {
