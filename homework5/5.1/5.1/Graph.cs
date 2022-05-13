@@ -6,15 +6,38 @@ using System.Threading.Tasks;
 
 namespace Task5_1;
 
+/// <summary>
+/// Класс граф со списком его вершин,
+/// с матрицей смежности,
+/// с размером матрицы,
+/// с максимальным номером вершины
+/// </summary>
 public class Graph
 {
+    /// <summary>
+    /// Список вершин
+    /// </summary>
     public List<Tuple<int, int, int>> Nodes { get; set; }
-    public int CountNodes;
-    public int CountEdges;
+
+    /// <summary>
+    /// Матрица смежности
+    /// </summary>
     public int[,] Matrix { get; set; }
+
+    /// <summary>
+    /// Размер матрицы
+    /// </summary>
     private int MatrixLength;
+
+    /// <summary>
+    /// Максимальный номер вершины
+    /// </summary>
     private int MaxNumberNode;
 
+    /// <summary>
+    /// Инициализация графа
+    /// </summary>
+    /// <param name="filePath">Путь файла</param>
     public Graph(string filePath)
     {
         Nodes = new List<Tuple<int, int, int>>();
@@ -23,7 +46,11 @@ public class Graph
         Matrix = new int[MatrixLength, MatrixLength];
         Parse(filePath);
     }
-
+    /// <summary>
+    /// Функция, которая парсит файл
+    /// и представляет его данные в виде графа
+    /// </summary>
+    /// <param name="filePath">Путь файла</param>
     private void Parse(string filePath)
     {
         using (StreamReader reader = new StreamReader(filePath))
@@ -52,6 +79,9 @@ public class Graph
         }
     }
 
+    /// <summary>
+    /// Функция увеличивает размер матрицы
+    /// </summary>
     private void Resize()
     {
         MatrixLength *= 2;
@@ -66,12 +96,22 @@ public class Graph
         Matrix = newMatrix;
     }
 
+    /// <summary>
+    /// Проверяет связность от одной вершины 
+    /// до другой
+    /// </summary>
+    /// <returns>Если вершины связаны, то 
+    /// функция возвращает true,
+    /// иначе false</returns>
     public bool CheckConnectedness(int oneNode, int twoNode)
     {
         bool[] visited = new bool[MaxNumberNode + 1];
         return Dfs(oneNode, twoNode, ref visited);
     }
 
+    /// <summary>
+    /// Поиск в глубину 
+    /// </summary>
     private bool Dfs(int oneNode, int twoNode, ref bool[] visited)
     {
         if (oneNode == twoNode)
@@ -92,12 +132,20 @@ public class Graph
         return false;
     }
 
+    /// <summary>
+    /// Удаление ребра
+    /// </summary>
+    /// <param name="node">Вершина графа</param>
     public void DeleteEdge(Tuple<int, int, int> node)
     {
         Matrix[node.Item1, node.Item2] = 0;
         Matrix[node.Item2, node.Item1] = 0;
     }
-   
+
+    /// <summary>
+    /// Распечатывание графа
+    /// </summary>
+    /// <param name="filepath">Путь файла</param>
     public void PrintGraph(string filepath)
     {   
         using StreamWriter writer = new StreamWriter(filepath);
@@ -124,11 +172,8 @@ public class Graph
         }
 
     }
-
     static void Main(string[] args)
     {
-        RouterTopology topology  = new RouterTopology();
-        topology.MakeTopology("C:/Users/Acer/source/repos/spbu-2sem-tasks/homework5/5.1/5.1/Input.txt",
-           "C:/Users/Acer/source/repos/spbu-2sem-tasks/homework5/5.1/5.1/Output.txt");
+        
     }
 }

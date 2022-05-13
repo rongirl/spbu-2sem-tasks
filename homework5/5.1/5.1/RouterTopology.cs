@@ -5,8 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Task5_1;
+/// <summary>
+/// Класс RouterTopology
+/// с методом MakeTopology
+/// </summary>
 public class RouterTopology
-{
+{  
+    /// <summary>
+    /// Создание топологии
+    /// </summary>
+    /// <param name="filePathInput">Путь файла с исходным графом</param>
+    /// <param name="filePathOutput">Путь файла с итоговым графом</param>
     public void MakeTopology(string filePathInput, string filePathOutput)
     {
         Graph graph = new Graph(filePathInput);
