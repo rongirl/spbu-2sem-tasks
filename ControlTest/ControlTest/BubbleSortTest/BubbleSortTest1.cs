@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using Sorting;
 using System.Collections.Generic;
+using Comparing;
 
 namespace BubbleSortTest;
 
@@ -16,7 +17,7 @@ public class Tests
     [TestCaseSource(nameof(Cases))]
     public void BubbleSortTest(List<int> list, List<int> expectedList)
     {   
-        var comparer = Comparer<int>.Default;   
+        CompareInt comparer = new CompareInt();   
         Sort.BubbleSort(list, comparer);
         Assert.AreEqual(expectedList, list);
     }
@@ -26,7 +27,7 @@ public class Tests
     {
         var list = new List<string> { "kkk", "bc", "abd" };
         var expectedList = new List<string> { "abd", "bc", "kkk" };
-        var comparer = Comparer<string>.Default;
+        CompareString comparer = new CompareString();
         Sort.BubbleSort(list, comparer);
         Assert.AreEqual(expectedList, list);
     }
