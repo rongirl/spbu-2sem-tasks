@@ -1,5 +1,8 @@
 ﻿namespace Task6_1;
 
+/// <summary>
+/// Функции для списка
+/// </summary>
 public static class Functions
 {
     /// <summary>
