@@ -7,13 +7,7 @@ namespace FunctionsTest;
 public class Tests
 {   
     private List<int> list = new List<int>() { 1, 2, 3, 4 };
-    
-    [SetUp]
-    public void Setup()
-    {
 
-    }
-    
     [Test]
     public void MapTest()
     {
