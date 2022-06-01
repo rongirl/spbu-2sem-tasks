@@ -84,11 +84,11 @@ public partial class CalculatorForm : Form
         {
             if (!signs[2].Contains('-'))
             {
-                input = input.Insert(0, "-");
+                input = input.Insert(signs[0].Length + signs[1].Length + 2, "-");
                 textBox.Text = input;
                 return;
             }
-            input = input.Remove(0, 1);
+            input = input.Remove(signs[0].Length + signs[1].Length + 2, signs[0].Length + signs[1].Length + 3);
             textBox.Text = input;
         }
         else
@@ -98,11 +98,15 @@ public partial class CalculatorForm : Form
     }
 
     private void DeleteButtonClick(object sender, EventArgs e)
-    {
-        string[] signs = input.Split(' ');
-        if (signs.Length == 1)
+    {   
+        if (input == "")
         {
-            
+            return;
+        }
+        string[] signs = input.Split(' ');
+        if (signs.Length == 1 && signs[0].Length == 2 && signs[0][0] == '-')
+        {
+            input = input.Remove(0, 2);
         }
         else if (signs.Length == 3)
         {
