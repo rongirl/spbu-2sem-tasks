@@ -1,13 +1,15 @@
-﻿using System;
-
-namespace BurrowsWheelerTransform;
+﻿namespace BurrowsWheelerTransform;
 
 /// <summary>
 /// Класс выполняет прямое и обратное преобразование 
-/// Барроуз-Уиллера
+/// Барроуза-Уиллера
 /// </summary>
 class Program
-{
+{   
+    /// <summary>
+    /// Прямое преобразование Барроуза-Уиллера
+    /// </summary>
+    /// <param name="originalString">Строка, над которой происходит прямое преобразование</param>
     private static (string, int) BurrowsWheelerTransform(string originalString)
     {
         int index = 0;
@@ -31,6 +33,14 @@ class Program
         }
         return (resultString, index);
     }
+
+    /// <summary>
+    /// Обратное преобразование 
+    /// Барроуза-Уиллера
+    /// </summary>
+    /// <param name="resultString">Строка, над которой происходит обратное преобразование</param>
+    /// <param name="index">Индекс конца строки, полученный из прямого преобразования</param>
+    /// <returns></returns>
     private static string InverseBurrowsWheelerTransform(string resultString, int index)
     {
         var tableOfString = new string[resultString.Length];
@@ -44,6 +54,7 @@ class Program
         }
         return tableOfString[index];
     }
+
     static void Main(string[] args)
     {
         Console.WriteLine("Введите исходную строку: ");
