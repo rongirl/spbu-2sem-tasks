@@ -33,7 +33,7 @@ public class Tests
         Assert.AreEqual(Functions.Fold(list, 1, (x, y) => x + y), 11);
         Assert.AreEqual(Functions.Fold(list, 1, (x, y) => x * y), 24);
         Assert.AreEqual(Functions.Fold(list, 1, (x, y) => x - y), -9);
-        Assert.AreEqual(Functions.Fold(emptyList, 1, (x, y) => x * y), 0);
+        Assert.AreEqual(Functions.Fold(emptyList, 1, (x, y) => x * y), 1);
     }
 }
 
