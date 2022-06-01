@@ -49,19 +49,19 @@ public class Calculator
             }
             case '*':
             {
-                return numberOne - numberTwo;
+                return numberOne * numberTwo;
             }
             case '/':
             {
                 if (numberTwo == 0)
                 {
-                    throw new InvalidOperationException();
+                    throw new DivideByZeroException("Не надо делить на 0");
                 }
                 return numberOne / numberTwo;
             }
             default:
             {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("Я не знаю, что произошло, но произошло что-то страшное");
             }
         }
     }

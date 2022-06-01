@@ -103,6 +103,7 @@ partial class CalculatorForm
             this.equalButton.TabIndex = 20;
             this.equalButton.Text = "=";
             this.equalButton.UseVisualStyleBackColor = true;
+            this.equalButton.Click += new System.EventHandler(this.EqualButtonClick);
             // 
             // doubleButton
             // 
@@ -201,6 +202,7 @@ partial class CalculatorForm
             this.clearAllButton.TabIndex = 11;
             this.clearAllButton.Text = "C";
             this.clearAllButton.UseVisualStyleBackColor = true;
+            this.clearAllButton.Click += new System.EventHandler(this.ClearAllButtonClick);
             // 
             // textBox
             // 
@@ -322,6 +324,7 @@ partial class CalculatorForm
             this.clearButton.TabIndex = 10;
             this.clearButton.Text = "CE";
             this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Click += new System.EventHandler(this.ClearButtonClick);
             // 
             // CalculatorForm
             // 

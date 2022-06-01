@@ -21,7 +21,7 @@ public partial class CalculatorForm : Form
     {   
         if (input == "")
         {
-            throw new InvalidOperationException();
+            return;
         }
         if (isOperationSelected)
         {
@@ -60,10 +60,6 @@ public partial class CalculatorForm : Form
                 input += ',';
             }
         }
-        else
-        {
-            throw new InvalidOperationException();
-        }
     }
 
     private void ChangeSignButtonClick(object sender, EventArgs e)
@@ -80,7 +76,7 @@ public partial class CalculatorForm : Form
             input = input.Remove(0, 1);
             textBox.Text = input;
         }
-        else if (signs.Length == 3)
+        else if (signs.Length == 3 && signs[2] != "")
         {
             if (!signs[2].Contains('-'))
             {
@@ -88,12 +84,8 @@ public partial class CalculatorForm : Form
                 textBox.Text = input;
                 return;
             }
-            input = input.Remove(signs[0].Length + signs[1].Length + 2, signs[0].Length + signs[1].Length + 3);
+            input = input.Remove(signs[0].Length + signs[1].Length + 2, 1);
             textBox.Text = input;
-        }
-        else
-        {
-            throw new InvalidOperationException();
         }
     }
 
@@ -107,10 +99,57 @@ public partial class CalculatorForm : Form
         if (signs.Length == 1 && signs[0].Length == 2 && signs[0][0] == '-')
         {
             input = input.Remove(0, 2);
+            textBox.Text = input;
+        }
+        else if (signs.Length == 3 && signs[2].Length == 2 && signs[2][0] == '-')
+        {
+            input = input.Remove(signs[0].Length + signs[1].Length + 2, 2);
+            textBox.Text = input;
+        }
+        else
+        {
+            input = input.Remove(input.Length - 1, 1);
+            textBox.Text = input;
+        }
+    }
+
+    private void ClearAllButtonClick(object sender, EventArgs e)
+    {
+        input = "";
+        textBox.Text = input;
+        calculator.Clear();
+        isOperationSelected = false;
+    }
+
+    private void ClearButtonClick(object sender, EventArgs e)
+    {
+        string[] signs = input.Split(' ');
+        if (signs.Length == 1)
+        {
+            input = input.Remove(0, signs[0].Length);
+            textBox.Text = input;
         }
         else if (signs.Length == 3)
         {
-            
+            input = input.Remove(signs[0].Length + signs[1].Length + 2, signs[2].Length);
+            textBox.Text = input;
+        }
+    }
+
+    private void EqualButtonClick(object sender, EventArgs e)
+    {
+        if (isOperationSelected)
+        {
+            string[] signs = input.Split(' ');
+            calculator.AddNumber(Convert.ToDouble(signs[0]));
+            calculator.AddOperation(Convert.ToChar(signs[1]));
+            calculator.AddNumber(Convert.ToDouble(signs[2]));
+            textBox.Text = "";
+            input = "";
+            input = calculator.Calculate().ToString();
+            textBox.Text = input;
+            calculator.Clear();
+            isOperationSelected = false;
         }
     }
 }
