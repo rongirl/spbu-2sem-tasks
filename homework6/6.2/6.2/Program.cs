@@ -14,7 +14,7 @@ public class Program
         {
             var eventLoop = new EventLoop();
             Game game = new Game();
-            game.PrintMap("C:/Users/Acer/source/repos/spbu-2sem-tasks/homework6/6.2/6.2/map.txt");
+            game.PrintMap("map.txt");
             eventLoop.LeftHandler += game.OnLeft;
             eventLoop.RightHandler += game.OnRight;
             eventLoop.UpHandler += game.OnUp;
