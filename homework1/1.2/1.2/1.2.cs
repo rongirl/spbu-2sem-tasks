@@ -1,58 +1,61 @@
 ﻿using System;
 
-namespace BurrowsWheelerTransform
+namespace BurrowsWheelerTransform;
+
+/// <summary>
+/// Класс выполняет прямое и обратное преобразование 
+/// Барроуз-Уиллера
+/// </summary>
+class Program
 {
-    class Program
+    private static (string, int) BurrowsWheelerTransform(string originalString)
     {
-        private static string BurrowsWheelerTransform(string originalString, ref int index)
+        int index = 0;
+        var tableOfStrings = new string[originalString.Length];
+        for (int i = 0; i < originalString.Length; i++)
         {
-            string[] tableOfStrings = new string[originalString.Length];
-            for (int i = 0; i < originalString.Length; i++)
-            {
-                tableOfStrings[i] = originalString;
-                char symbol = originalString[originalString.Length - 1];
-                originalString = originalString.Remove(originalString.Length - 1, 1);
-                originalString = symbol + originalString;
-            }
-            Array.Sort(tableOfStrings);
-            string resultString = "";
-            for (int i = 0; i < tableOfStrings.Length; i++)
-            {
-                resultString += tableOfStrings[i][originalString.Length - 1];
-                if (string.Compare(tableOfStrings[i], originalString) == 0)
-                {
-                    index = i;
-                }
-            }
-            return resultString;
+            tableOfStrings[i] = originalString;
+            char symbol = originalString[originalString.Length - 1];
+            originalString = originalString.Remove(originalString.Length - 1, 1);
+            originalString = symbol + originalString;
         }
-        private static string InverseBurrowsWheelerTransform(string resultString, int index)
+        Array.Sort(tableOfStrings);
+        string resultString = "";
+        for (int i = 0; i < tableOfStrings.Length; i++)
         {
-            string[] tableOfString = new string[resultString.Length];
-            for (int i = 0; i < tableOfString.Length; i++)
+            resultString += tableOfStrings[i][originalString.Length - 1];
+            if (string.Compare(tableOfStrings[i], originalString) == 0)
             {
-                for (int j = 0; j < tableOfString.Length; j++)
-                {
-                    tableOfString[j] = resultString[j] + tableOfString[j];
-                }
-                Array.Sort(tableOfString);
+                index = i;
             }
-            return tableOfString[index];
         }
-        static void Main(string[] args)
+        return (resultString, index);
+    }
+    private static string InverseBurrowsWheelerTransform(string resultString, int index)
+    {
+        var tableOfString = new string[resultString.Length];
+        for (int i = 0; i < tableOfString.Length; i++)
         {
-            int number = 0;
-            Console.WriteLine("Введите исходную строку: ");
-            var inputString = Console.ReadLine();
-            if (inputString == null)
+            for (int j = 0; j < tableOfString.Length; j++)
             {
-                return;
+                tableOfString[j] = resultString[j] + tableOfString[j];
             }
-            Console.WriteLine("Строка после прямого преобразования: ");
-            string stringAfterDirectTransform = BurrowsWheelerTransform(inputString, ref number);
-            Console.WriteLine(stringAfterDirectTransform, number);
-            Console.WriteLine("Строка после обратного преобразования: ");
-            Console.WriteLine(InverseBurrowsWheelerTransform(stringAfterDirectTransform, number));
+            Array.Sort(tableOfString);
         }
+        return tableOfString[index];
+    }
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Введите исходную строку: ");
+        var inputString = Console.ReadLine();
+        if (inputString == null)
+        {
+            return;
+        }
+        Console.WriteLine("Строка после прямого преобразования: ");
+        var (stringAfterDirectTransform, index) = BurrowsWheelerTransform(inputString);
+        Console.WriteLine($"{stringAfterDirectTransform}, {index}");
+        Console.WriteLine("Строка после обратного преобразования: ");
+        Console.WriteLine(InverseBurrowsWheelerTransform(stringAfterDirectTransform, index));
     }
 }
