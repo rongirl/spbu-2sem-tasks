@@ -1,16 +1,11 @@
 ﻿using NUnit.Framework;
-using _4._2.Exception;
+using Task4_2.Exception;
 
-namespace _4._2.Tests;
+namespace Task4_2.Tests;
 
 public class TestsList
 {
-    private List list = new List();
-
-    [SetUp]
-    public void Setup()
-    {
-    }
+    private List list = new();
 
     [Test]
     public void AddValueByInvalidPositionTest()

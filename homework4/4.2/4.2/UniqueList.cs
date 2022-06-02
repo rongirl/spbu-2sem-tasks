@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using _4._2.Exception;
+﻿using Task4_2.Exception;
 
-namespace _4._2;
+namespace Task4_2;
 
+/// <summary>
+/// Список элементов, в котором значения не совпадают
+/// </summary>
 public class UniqueList : List
 {
     /// <summary>
@@ -15,12 +13,30 @@ public class UniqueList : List
     /// <param name="value">Значение элемента</param>
     /// <param name="position">Номер позиции добавляемого элемента, позиции с нуля</param>
     /// <exception cref="AddException">Выбрасываемое исключение, когда значение уже присутствует в списке</exception>
-    public void Add(int value, int position)
+    public override void Add(int value, int position)
     {
         if (Contain(value))
         {
             throw new AddException();
         }
         base.Add(value, position);
+    }
+
+    /// <summary>
+    /// Изменение значения 
+    /// </summary>
+    /// <param name="value">Значение</param>
+    /// <param name="position">Позиция</param>
+    public override void ChangeValue(int value, int position)
+    {
+        if (Contain(value))
+        {
+            if (PositionOf(value) == position)
+            {
+                return;
+            }
+            throw new AddException();   
+        }
+        base.ChangeValue(value, position);
     }
 }

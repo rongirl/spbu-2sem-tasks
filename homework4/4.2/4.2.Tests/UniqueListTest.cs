@@ -1,15 +1,10 @@
 using NUnit.Framework;
-using _4._2.Exception;
-namespace _4._2.Tests;
+using Task4_2.Exception;
+namespace Task4_2.Tests;
 
 public class TestsUniqueList
 {   
     private UniqueList list = new UniqueList();
-
-    [SetUp]
-    public void Setup()
-    {
-    }
 
     [Test]
     public void AddValue()
@@ -17,5 +12,19 @@ public class TestsUniqueList
         list.Add(100, 0);
         list.Add(101, 1);
         Assert.Throws<AddException>(() => list.Add(100, 2));
+    }
+    [Test]
+    public void RemoveByInvalidPositionTest()
+    {
+        Assert.Throws<InvalidPositionException>(() => list.Remove(10));
+        Assert.Throws<InvalidPositionException>(() => list.Remove(-10));
+    }
+
+    [Test()]
+    public void ChangeValueTest()
+    {
+        list.Add(0, 0);
+        list.Add(1, 1);
+        Assert.Throws<AddException>(() => list.ChangeValue(1, 1));
     }
 }

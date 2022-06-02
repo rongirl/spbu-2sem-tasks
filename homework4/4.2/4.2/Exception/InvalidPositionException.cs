@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Task4_2.Exception;
 
-namespace _4._2.Exception;
 /// <summary>
 /// Выбрасываемое исключение, когда позиция недопустима
 /// </summary>
