@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _4._1;
+namespace Task4_1;
 public abstract class Operation : INode
 {
     public INode leftSon { get; set; }
