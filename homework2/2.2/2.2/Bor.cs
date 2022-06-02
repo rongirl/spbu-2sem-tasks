@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace TrieSpace;
 
-namespace BorSpace;
-
-public class Bor
+public class Trie
 {
     private class Node
     {
-        public Node[] next = new Node[26];
+        public Dictionary<int, Node> next = new Dictionary<int, Node>();
         public bool isTerminal;
         public int countStringsContainPrefix = 0;
     }
     private int size = 0;
-    private Node root = new Node();
+
+    private Node root = new();
+
     public bool Add(string element)
     {   
         if (Contain(element))
@@ -51,7 +47,11 @@ public class Bor
     {
         Node current = root;
         for (int i = 0; i < element.Length; i++)
-        {
+        {   
+            if (!current.next.ContainsKey(element[i] - 'a'))
+            {
+                return false;
+            }
             current = current.next[element[i] - 'a'];
             if (current == null)
             {
@@ -60,7 +60,7 @@ public class Bor
         }
         return current.isTerminal;
     }
-    
+
     public bool Remove(string element)
     {
         if (!Contain(element))
@@ -89,7 +89,6 @@ public class Bor
                 var temporary = current.next[symbol - 'a'];
                 current.next[symbol - 'a'] = null;
                 current = temporary;
-
             }
         }
         size--;
@@ -120,6 +119,8 @@ public class Bor
     }
     static void Main(string[] args)
     {
-
+        Trie trie = new Trie();
+        trie.Add("arabella");
+        trie.Add("bella");
     }
 }
