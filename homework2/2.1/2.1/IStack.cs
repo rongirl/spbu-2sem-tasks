@@ -4,14 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _2._1
+namespace Task2_1;
+
+public interface IStack
 {
-    public interface IStack
-    {
-        void Push(double value);
+    void Push(double value);
 
-        double Pop();
+    double Pop();
 
-        bool IsEmpty();
-    }
+    bool IsEmpty();
 }

@@ -4,44 +4,45 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _2._1
+namespace Task2_1;
+
+public class StackArray : IStack
 {
-    public class StackArray : IStack
+    private double[] stackElements;
+    private int size;
+
+    public StackArray()
     {
-        private double[] stackElements;
-        private int size;
-        public StackArray()
+        stackElements = new double[10];
+    }
+
+    public void Push(double value)
+    {
+        if (size == stackElements.Length)
         {
-            stackElements = new double[10];
-            size = 0;
+            Resize();
         }
-        public void Push(double value)
+        stackElements[size] = value;
+        size++;
+    }
+
+    public void Resize()
+    {
+        Array.Resize(ref stackElements, stackElements.Length * 2);
+    }
+
+    public bool IsEmpty()
+       => size == 0;
+
+    public double Pop()
+    {
+        if (IsEmpty())
         {
-            if (size == stackElements.Length)
-            {
-                Resize();
-            }
-            stackElements[size] = value;
-            size++;
+            throw new Exception("Стек пуст");
         }
-        public void Resize()
-        {
-            Array.Resize(ref stackElements, stackElements.Length * 2);
-        }
-        public bool IsEmpty()
-        {
-            return size == 0;
-        }
-        public double Pop()
-        {
-            if (IsEmpty())
-            {
-                throw new Exception("Стек пуст");
-            }
-            size--;
-            double headStack = stackElements[size];
-            stackElements[size] = 0;
-            return headStack;
-        }
+        size--;
+        var headStack = stackElements[size];
+        stackElements[size] = 0;
+        return headStack;
     }
 }
