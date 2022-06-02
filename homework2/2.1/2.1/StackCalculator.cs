@@ -1,7 +1,16 @@
 ﻿namespace Task2_1;
 
+/// <summary>
+/// Класс, включающий в себя методы для
+/// вычисления постфиксного выражения
+/// </summary>
 public static class StackCalculator
-{
+{   
+    /// <summary>
+    /// Добавление вычисления в стек
+    /// </summary>
+    /// <param name="stack">Стек</param>
+    /// <param name="symbol">Постфиксная запись</param>
     private static void PerformOperation(IStack stack, string symbol)
     {
         var operandOne = stack.Pop();
@@ -34,6 +43,13 @@ public static class StackCalculator
             }
         }
     }
+
+    /// <summary>
+    /// Вычисление значения постфиксной записи
+    /// </summary>
+    /// <param name="postfixExpression">Постфиксная запись выражения</param>
+    /// <param name="stack">Стек</param>
+    /// <returns>Значение выражения</returns>
     public static double Calculate(string postfixExpression, IStack stack)
     {
         int number = 0;
