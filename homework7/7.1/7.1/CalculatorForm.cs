@@ -6,10 +6,10 @@ public partial class CalculatorForm : Form
     {
         InitializeComponent();
     }
-    private Calculator calculator = new Calculator();
+
+    private Calculator calculator = new();
     private string input = string.Empty;
     private bool isOperationSelected = false;
-    private bool needNewNumber = false;
 
     private void DigitButtonClick(object sender, EventArgs e)
     {
@@ -30,8 +30,7 @@ public partial class CalculatorForm : Form
             calculator.AddOperation(Convert.ToChar(signs[1]));
             calculator.AddNumber(Convert.ToDouble(signs[2]));
             textBox.Text = "";
-            input = "";
-            input = calculator.Calculate().ToString();
+            input = calculator.Calculate().ToString()!;
             textBox.Text = input;
             calculator.Clear();
             isOperationSelected = false;
