@@ -47,4 +47,3 @@ public class StackTest
         Assert.AreEqual(1, stack.Pop());
     }
 }
-
