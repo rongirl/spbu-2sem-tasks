@@ -21,6 +21,9 @@ public class List
         public ListElement Next { get; set; }
         public int Value { get; set; }
     }
+    /// <summary>
+    /// Первый элемент списка
+    /// </summary>
     private ListElement head;
 
     /// <summary>

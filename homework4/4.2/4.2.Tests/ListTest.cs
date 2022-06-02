@@ -38,5 +38,3 @@ public class TestsList
         Assert.IsFalse(list.Contain(2));
     }
 }   
-
-
