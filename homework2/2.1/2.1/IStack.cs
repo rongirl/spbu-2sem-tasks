@@ -1,17 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Task2_1;
 
-namespace _2._1
+/// <summary>
+/// Интерфейс для стека
+/// </summary>
+public interface IStack
 {
-    public interface IStack
-    {
-        void Push(double value);
+    /// <summary>
+    /// Добавляет элемент в голову стека
+    /// </summary>
+    /// <param name="value">Добавляемое значение</param>
+    void Push(double value);
 
-        double Pop();
+    /// <summary>
+    /// Возвращает значение с головы стека и удаляет его
+    /// </summary>
+    double Pop();
 
-        bool IsEmpty();
-    }
+    /// <summary>
+    /// Проверяет стек на пустоту
+    /// </summary>
+    /// <returns>True, если пуст
+    /// False, если нет</returns>
+    bool IsEmpty();
 }

@@ -1,47 +1,70 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Task2_1;
 
-namespace _2._1
+/// <summary>
+/// Стек, основанный на массиве
+/// </summary>
+public class StackArray : IStack
 {
-    public class StackArray : IStack
+    /// <summary>
+    /// Массив элементов
+    /// </summary>
+    private double[] stackElements;
+
+    /// <summary>
+    /// Размер стека
+    /// </summary>
+    private int size;
+
+    /// <summary>
+    /// Инициализация стека
+    /// </summary>
+    public StackArray()
     {
-        private double[] stackElements;
-        private int size;
-        public StackArray()
+        stackElements = new double[10];
+    }
+
+    /// <summary>
+    /// Добавляет элемент в голову стека
+    /// </summary>
+    /// <param name="value">Добавляемое значение</param>
+    public void Push(double value)
+    {
+        if (size == stackElements.Length)
         {
-            stackElements = new double[10];
-            size = 0;
+            Resize();
         }
-        public void Push(double value)
+        stackElements[size] = value;
+        size++;
+    }
+
+    /// <summary>
+    /// Увеличение размера массива
+    /// </summary>
+    public void Resize()
+    {
+        Array.Resize(ref stackElements, stackElements.Length * 2);
+    }
+
+    /// <summary>
+    /// Проверка на пустоту
+    /// </summary>
+    /// <returns>True, если пуст
+    /// False, если нет</returns>
+    public bool IsEmpty()
+       => size == 0;
+
+    /// <summary>
+    /// Возвращает значение с головы стека и удаляет его
+    /// </summary>
+    public double Pop()
+    {
+        if (IsEmpty())
         {
-            if (size == stackElements.Length)
-            {
-                Resize();
-            }
-            stackElements[size] = value;
-            size++;
+            throw new Exception("Стек пуст");
         }
-        public void Resize()
-        {
-            Array.Resize(ref stackElements, stackElements.Length * 2);
-        }
-        public bool IsEmpty()
-        {
-            return size == 0;
-        }
-        public double Pop()
-        {
-            if (IsEmpty())
-            {
-                throw new Exception("Стек пуст");
-            }
-            size--;
-            double headStack = stackElements[size];
-            stackElements[size] = 0;
-            return headStack;
-        }
+        size--;
+        var headStack = stackElements[size];
+        stackElements[size] = 0;
+        return headStack;
     }
 }

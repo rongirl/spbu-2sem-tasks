@@ -1,56 +1,77 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Task2_1;
 
-namespace _2._1
-{  
-    public class StackCalculator
+/// <summary>
+/// Класс, включающий в себя методы для
+/// вычисления постфиксного выражения
+/// </summary>
+public static class StackCalculator
+{
+    /// <summary>
+    /// Добавление вычисления в стек
+    /// </summary>
+    /// <param name="stack">Стек</param>
+    /// <param name="symbol">Постфиксная запись</param>
+    private static void PerformOperation(IStack stack, string symbol)
     {
-        private static void PerformOperation(IStack stack, string symbol)
+        var operandOne = stack.Pop();
+        var operandTwo = stack.Pop();
+        switch (symbol)
         {
-            var operandOne = stack.Pop();
-            var operandTwo = stack.Pop();
-            if (symbol == "+")
-            {
-                stack.Push(operandOne + operandTwo);
-            }
-            else if (symbol == "-")
-            {
-                stack.Push(operandTwo - operandOne);
-            }
-            else if (symbol == "*")
-            {
-                stack.Push(operandTwo * operandOne);
-            }
-            else if (symbol == "/")
-            {
-                stack.Push(operandTwo / operandOne);
-            }
+            case "+":
+                {
+                    stack.Push(operandOne + operandTwo);
+                    break;
+                }
+            case "-":
+                {
+                    stack.Push(operandTwo - operandOne);
+                    break;
+                }
+            case "*":
+                {
+                    stack.Push(operandTwo * operandOne);
+                    break;
+                }
+            case "/":
+                {
+                    stack.Push(operandTwo / operandOne);
+                    break;
+                }
+            default:
+                {
+                    throw new InvalidOperationException();
+                }
         }
-        public static double Calculate(string postfixExpression, IStack stack)
+    }
+
+    /// <summary>
+    /// Вычисление значения постфиксной записи
+    /// </summary>
+    /// <param name="postfixExpression">Постфиксная запись выражения</param>
+    /// <param name="stack">Стек</param>
+    /// <returns>Значение выражения</returns>
+    public static double Calculate(string postfixExpression, IStack stack)
+    {
+        int number = 0;
+        var strings = postfixExpression.Split();
+        foreach (var element in strings)
         {
-            int number = 0;
-            var strings = postfixExpression.Split();
-            foreach (var element in strings)
-            {   
-                if (int.TryParse(element, out number))
-                {
-                    stack.Push(number);
-                    continue;
-                }
-                if (element == "")
-                {
-                    continue;
-                }
-                switch (element)
-                {   
-                    case "+":
-                    case "-":
-                    case "*":
-                    case "/":
-                    {   
+            if (int.TryParse(element, out number))
+            {
+                stack.Push(number);
+                continue;
+            }
+            if (element == "")
+            {
+                continue;
+            }
+            switch (element)
+            {
+                case "+":
+                case "-":
+                case "*":
+                case "/":
+                    {
                         if (stack.IsEmpty())
                         {
                             throw new InvalidOperationException("Ошибка");
@@ -59,7 +80,7 @@ namespace _2._1
                         if (stack.IsEmpty())
                         {
                             throw new InvalidOperationException("Ошибка");
-                        }    
+                        }
                         if (element == "/" && head.CompareTo(0) == 0)
                         {
                             throw new DivideByZeroException("Деление на ноль");
@@ -68,20 +89,19 @@ namespace _2._1
                         PerformOperation(stack, element);
                         break;
                     }
-                    default:
-                        throw new InvalidOperationException("Ошибка");
-                }
+                default:
+                    throw new InvalidOperationException("Ошибка");
             }
-            if (stack.IsEmpty())
-            {
-                throw new InvalidOperationException("Ошибка");
-            }
-            var result = stack.Pop();
-            if (stack.IsEmpty())
-            {
-                return result;
-            }
+        }
+        if (stack.IsEmpty())
+        {
             throw new InvalidOperationException("Ошибка");
         }
+        var result = stack.Pop();
+        if (stack.IsEmpty())
+        {
+            return result;
+        }
+        throw new InvalidOperationException("Ошибка");
     }
 }
