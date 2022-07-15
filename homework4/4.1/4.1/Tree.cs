@@ -1,77 +1,88 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Task4_1;
 
-namespace Task4_1;
+/// <summary>
+/// Дерево разбора
+/// </summary>
 public class Tree
-{
-    private INode root;
-    public int getNumber(string inputString, ref int index)
+{   
+    /// <summary>
+    /// Корень дерева
+    /// </summary>
+    private INode? root;
+    
+    /// <summary>
+    /// Инициализация экземпляра класса
+    /// </summary>
+    /// <param name="inputString">Префиксная запись выражения</param>
+    public Tree(string inputString)
     {
-        int number = 0;
-        int sign = 1;
-        if (inputString[index] == '-')
-        {
-            sign = -1;
-            index++;
-        }
-        while (index < inputString.Length && inputString[index] >= '0' && inputString[index] <= '9')
-        {
-            number = number * 10 + (inputString[index] - '0');
-            index++;
-        }
-        return number * sign;
+        MakeTree(inputString);  
     }
-    public INode createNewNode(string inputString, ref int index)
+
+    /// <summary>
+    /// Создает новую вершину дерева
+    /// </summary>
+    /// <param name="strings">Массив подстрок префиксной записи</param>
+    /// <param name="index">Индекс подстроки</param>
+    /// <returns>Новая вершина</returns>
+    private INode CreateNewNode(string[] strings, ref int index)
     {
         index++;
-        Operation newNode;
-        while (index < inputString.Length && (inputString[index] == '(' || inputString[index] == ' ' || inputString[index] == ')'))
+        int operand = 0;
+        if (int.TryParse(strings[index], out operand))
         {
-            index++;
+            return new Operand() { Value = operand };
         }
-        if (inputString[index] == '+')
-        {
-            newNode = new Addition();
-            newNode.leftSon = createNewNode(inputString, ref index);
-            newNode.rightSon = createNewNode(inputString, ref index);
+        Operation newNode; 
+        switch (strings[index])
+        { 
+            case "+":
+            {
+                newNode = new Addition();
+                break;
+            }
+            case "*":
+            {
+                newNode = new Multiplication();
+                break;
+            }
+            case "-":
+            {
+                newNode = new Subtraction();
+                break;
+            }
+            case "/":
+            {
+                newNode = new Division();
+                break;
+            }
+            default:
+                throw new InvalidOperationException();
         }
-        else if (inputString[index] == '-' && inputString[index + 1] == ' ')
-        {
-            newNode = new Substraction();
-            newNode.leftSon = createNewNode(inputString, ref index);
-            newNode.rightSon = createNewNode(inputString, ref index);
-        }
-        else if (inputString[index] == '*')
-        {
-            newNode = new Multiplication();
-            newNode.leftSon = createNewNode(inputString, ref index);
-            newNode.rightSon = createNewNode(inputString, ref index);
-        }
-        else if (inputString[index] == '/')
-        {
-            newNode = new Division();
-            newNode.leftSon = createNewNode(inputString, ref index);
-            newNode.rightSon = createNewNode(inputString, ref index);
-        }
-        else
-        {
-            Operand newNodeOperand = new Operand { value = getNumber(inputString, ref index) };
-            return newNodeOperand;
-        }
+        newNode.LeftSon = CreateNewNode(strings, ref index);    
+        newNode.RightSon = CreateNewNode(strings, ref index);
         return newNode;
     }
-    
-    public INode makeTree(string inputString)
+
+    /// <summary>
+    /// Строит дерево разбора
+    /// </summary>
+    /// <param name="inputString">Префиксная запись выражения</param>
+    public void MakeTree(string inputString)
     {
         int index = -1;
-        root = createNewNode(inputString, ref index);
-        return root;
+        var substrings = inputString.Split(new char[] { ' ', '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
+        root = CreateNewNode(substrings, ref index);
     }
+    
+    /// <summary>
+    /// Печатает дерево
+    /// </summary>
+    public void Print() => root?.Print();
 
-    public void Print() => root.Print();
-
-    public int Calculate() => root.Calculate();
+    /// <summary>
+    /// Вычисляет значение выражения по дереву разбора
+    /// </summary>
+    /// <returns>Значение выражения</returns>
+    public int Calculate() => root!.Calculate();
 }

@@ -1,20 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Task4_1;
 
-namespace Task4_1;
-
+/// <summary>
+/// Класс вершины дерева
+/// </summary>
 public class Operand : INode
-{
-    public int value { get; set; }
+{   
+    /// <summary>
+    /// Значение вершины
+    /// </summary>
+    public int Value { get; set; }
 
+    /// <summary>
+    /// Печатает вершину
+    /// </summary>
     public void Print()
     {
-        Console.Write($"{value} ");
+        Console.Write($"{Value} ");
     }
 
-    public int Calculate() => value;
+    /// <summary>
+    /// Вычисляет значение
+    /// </summary>
+    /// <returns>Значение вершины</returns>
+    public int Calculate() => Value;
 }
-

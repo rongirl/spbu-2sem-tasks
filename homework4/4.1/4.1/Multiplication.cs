@@ -1,21 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Task4_1;
 
-namespace Task4_1;
-
+/// <summary>
+/// Операция умножения
+/// </summary>
 public class Multiplication : Operation
 {
+    /// <summary>
+    /// Вычисляет значение поддерева
+    /// </summary>
+    /// <returns>Результат вычисления</returns>
     public override int Calculate()
-    {
-        return leftSon.Calculate() * rightSon.Calculate();
-    }
+    => LeftSon!.Calculate() * RightSon!.Calculate();
 
+    /// <summary>
+    /// Печатает операцию и поддерево
+    /// </summary>
     public override void Print()
     {
-
         Console.Write("( * ");
         base.Print();
         Console.Write(" ) ");

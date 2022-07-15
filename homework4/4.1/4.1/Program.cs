@@ -1,16 +1,11 @@
-﻿using System;
-using Task4_1;
+﻿using Task4_1;
 
-namespace Program;
-
-class Program
+string? inputString = Console.ReadLine();
+if (inputString == null)
 {
-    static void Main(string[] args)
-    {
-        string inputString = Console.ReadLine();
-        Tree tree = new Tree();
-        tree.makeTree(inputString);
-        tree.Calculate();
-        tree.Print();
-    }
+    Console.WriteLine(":(");
+    return;
 }
+var tree = new Tree(inputString);
+Console.WriteLine(tree.Calculate());
+tree.Print();

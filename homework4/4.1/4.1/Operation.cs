@@ -1,21 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Task4_1;
 
-namespace Task4_1;
+/// <summary>
+///  Класс вершины дерева
+/// </summary>
 public abstract class Operation : INode
-{
-    public INode leftSon { get; set; }
-    public INode rightSon { get; set; }
+{    
+    /// <summary>
+    /// Левый сын вершины
+    /// </summary>
+    public INode? LeftSon { get; set; }
 
+    /// <summary>
+    /// Правый сын вершины
+    /// </summary>
+    public INode? RightSon { get; set; }
+
+    /// <summary>
+    /// Печатает поддерево
+    /// </summary>
     public virtual void Print()
     {
-        leftSon.Print();    
-        rightSon.Print();   
+        LeftSon?.Print();    
+        RightSon?.Print();   
     }
 
+    /// <summary>
+    /// Вычисляет значение поддерева
+    /// </summary>
+    /// <returns>Результат вычисления</returns>
     public abstract int Calculate();
 }
-
