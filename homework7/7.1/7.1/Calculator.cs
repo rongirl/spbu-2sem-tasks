@@ -1,17 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Task7_1;
 
-namespace Task7_1;
-
+/// <summary>
+/// Класс, выполняющий операции с двумя числами
+/// </summary>
 public class Calculator
 {
+    /// <summary>
+    /// Первое операнд
+    /// </summary>
     private double? numberOne;
+
+    /// <summary>
+    /// Второ1 операнд
+    /// </summary>
     private double? numberTwo;
+
+    /// <summary>
+    /// Операция
+    /// </summary>
     private char? operation;
 
+    /// <summary>
+    /// Добавление операнда
+    /// Если первый операнд существует, то
+    /// добавляет или изменяет второй.
+    /// Если первого операнда нет, то 
+    /// добавляет первый операнд
+    /// </summary>
+    /// <param name="number">Добавляемое число</param>
     public void AddNumber(double number)
     {
         if (numberOne == null)
@@ -22,8 +38,15 @@ public class Calculator
         numberTwo = number;
     }
 
+    /// <summary>
+    /// Добавление операции
+    /// </summary>
+    /// <param name="operation">Добавляемая операция</param>
     public void AddOperation(char operation) => this.operation = operation;
 
+    /// <summary>
+    /// Удаление операции и операндов
+    /// </summary>
     public void Clear()
     {
         numberOne = null;
@@ -31,6 +54,10 @@ public class Calculator
         operation = null;
     }
 
+    /// <summary>
+    /// Вычисление выражения
+    /// </summary>
+    /// <returns>Результат вычисления</returns>
     public double? Calculate()
     {
         if (numberTwo == null || numberOne == null)

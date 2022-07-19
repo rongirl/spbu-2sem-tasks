@@ -11,12 +11,18 @@ public partial class CalculatorForm : Form
     private string input = string.Empty;
     private bool isOperationSelected = false;
 
+    /// <summary>
+    /// Обрабатывает нажатие на кнопку с цифрой
+    /// </summary>
     private void DigitButtonClick(object sender, EventArgs e)
     {
         textBox.Text += (sender as Button)?.Text;
         input += (sender as Button)?.Text;
     }
 
+    /// <summary>
+    /// Обрабатывает нажатие на кнопку с операцией
+    /// </summary>
     private void OperationButtonClick(object sender, EventArgs e)
     {   
         if (input == "")
@@ -40,6 +46,9 @@ public partial class CalculatorForm : Form
         isOperationSelected = true;
     }
 
+    /// <summary>
+    /// Обрабатывает нажатие на кнопку с запятой
+    /// </summary>
     private void DoubleButtonClick(object sender, EventArgs e)
     {
         string[] signs = input.Split(' ');
@@ -61,6 +70,9 @@ public partial class CalculatorForm : Form
         }
     }
 
+    /// <summary>
+    /// Обрабатывает нажатие на кнопку изменения знака
+    /// </summary>
     private void ChangeSignButtonClick(object sender, EventArgs e)
     {
         string[] signs = input.Split(' ');
@@ -88,6 +100,9 @@ public partial class CalculatorForm : Form
         }
     }
 
+    /// <summary>
+    /// Обрабатывает нажатие на кнопку удаления
+    /// </summary>
     private void DeleteButtonClick(object sender, EventArgs e)
     {   
         if (input == "")
@@ -112,6 +127,9 @@ public partial class CalculatorForm : Form
         }
     }
 
+    /// <summary>
+    /// Обрабатывает нажатие на кнопку удаления строки
+    /// </summary>
     private void ClearAllButtonClick(object sender, EventArgs e)
     {
         input = "";
@@ -120,6 +138,9 @@ public partial class CalculatorForm : Form
         isOperationSelected = false;
     }
 
+    /// <summary>
+    /// Обрабатывает нажатие на кнопку удаления числа
+    /// </summary>
     private void ClearButtonClick(object sender, EventArgs e)
     {
         string[] signs = input.Split(' ');
@@ -135,6 +156,9 @@ public partial class CalculatorForm : Form
         }
     }
 
+    /// <summary>
+    /// Обрабатывает нажатие на кнопку со знаком равно
+    /// </summary>
     private void EqualButtonClick(object sender, EventArgs e)
     {
         if (isOperationSelected)
@@ -145,7 +169,7 @@ public partial class CalculatorForm : Form
             calculator.AddNumber(Convert.ToDouble(signs[2]));
             textBox.Text = "";
             input = "";
-            input = calculator.Calculate().ToString();
+            input = calculator.Calculate().ToString()!;
             textBox.Text = input;
             calculator.Clear();
             isOperationSelected = false;
