@@ -11,7 +11,7 @@ public class Calculator
     private double? numberOne;
 
     /// <summary>
-    /// Второ1 операнд
+    /// Второй операнд
     /// </summary>
     private double? numberTwo;
 
