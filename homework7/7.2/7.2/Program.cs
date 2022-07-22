@@ -1,4 +1,4 @@
-namespace Task7._2;
+namespace Task7_2;
 
 internal static class Program
 {

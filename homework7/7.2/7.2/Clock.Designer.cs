@@ -1,4 +1,4 @@
-﻿namespace Task7._2;
+﻿namespace Task7_2;
 partial class Clock
 {
     /// <summary>
@@ -42,7 +42,7 @@ partial class Clock
             this.picture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picture.TabIndex = 0;
             this.picture.TabStop = false;
-            this.picture.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picture_MouseDown);
+            this.picture.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PictureMouseDown);
             // 
             // Clock
             // 
@@ -53,7 +53,7 @@ partial class Clock
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Clock";
             this.Text = "Clock";
-            this.Load += new System.EventHandler(this.Clock_Load);
+            this.Load += new System.EventHandler(this.ClockLoad);
             ((System.ComponentModel.ISupportInitialize)(this.picture)).EndInit();
             this.ResumeLayout(false);
 

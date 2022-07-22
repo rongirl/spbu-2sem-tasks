@@ -1,6 +1,6 @@
 using System.Runtime.InteropServices;
 
-namespace Task7._2;
+namespace Task7_2;
 public partial class Clock : Form
 {
     [DllImport("user32", CharSet = CharSet.Auto)]
@@ -9,10 +9,25 @@ public partial class Clock : Form
     [DllImport("user32", CharSet = CharSet.Auto)]
     internal extern static bool ReleaseCapture();
 
+    /// <summary>
+    /// Координаты центра циферблата
+    /// </summary>
     private (int x, int y) center = (175, 175);
-    private int secondHand = 100;
-    private int minuteHand = 90;
-    private int hourHand = 75;
+
+    /// <summary>
+    /// Длина секудной стрелки
+    /// </summary>
+    private int secondHandLength = 100;
+
+    /// <summary>
+    /// Длина минутной стрелки
+    /// </summary>
+    private int minuteHandLength = 90;
+
+    /// <summary>
+    /// Длина часовой стрелки
+    /// </summary>
+    private int hourHandLength = 75;
     System.Windows.Forms.Timer clock = new System.Windows.Forms.Timer();
     public Clock()
     {
@@ -21,7 +36,7 @@ public partial class Clock : Form
         this.TransparencyKey = this.BackColor;
     }
 
-    private void picture_MouseDown(object sender, MouseEventArgs e)
+    private void PictureMouseDown(object sender, MouseEventArgs e)
     {
         const uint WM_SYSCOMMAND = 0x0112;
         const uint DOMOVE = 0xF012;
@@ -29,16 +44,23 @@ public partial class Clock : Form
         PostMessage(this.Handle, WM_SYSCOMMAND, DOMOVE, 0);
     }
 
-    private void Clock_Load(object sender, EventArgs e)
+    private void ClockLoad(object sender, EventArgs e)
     {
         clock.Interval = 1000;
-        clock.Tick += new EventHandler(this.clock_Tick);
+        clock.Tick += new EventHandler(this.ClockTick!);
         clock.Start();
     }
 
-    private (int, int) minuteSecondCoordinates(int count, int handLength)
+    /// <summary>
+    /// Возвращает координаты конца секундной или 
+    /// минутной стрелки
+    /// </summary>
+    /// <param name="count">Количество секунд или минут </param>
+    /// <param name="handLength">Длина секундной или минутной стрелки</param>
+
+    private (int, int) MinuteOrSecondCoordinates(int count, int handLength)
     {
-        (int, int) coordinates;
+        (int, int) coordinates = (0, 0);
         count *= 6;
         if (count >= 0 && count <= 180)
         {
@@ -53,9 +75,15 @@ public partial class Clock : Form
         return coordinates;
     }
 
-    private (int, int) hourCoordinates(int hourCount, int minuteCount, int handLength)
+    /// <summary>
+    /// Возвращает координаты конца часовой стрелки
+    /// </summary>
+    /// <param name="hourCount">Количество часов</param>
+    /// <param name="minuteCount">Количество минут</param>
+    /// <param name="handLength">Длина часовой стрелки</param>
+    private (int, int) HourCoordinates(int hourCount, int minuteCount, int handLength)
     {
-        (int, int) coordinates;
+        (int, int) coordinates = (0, 0);
         int count = (int)((hourCount * 30) + (minuteCount * 0.5));
         if (count >= 0 && count <= 180)
         {
@@ -70,41 +98,41 @@ public partial class Clock : Form
         return coordinates;
     }
 
-    private void clock_Tick(object sender, EventArgs e)
-    {
+    /// <summary>
+    /// Рисует стрелки часов каждую секунду
+    /// </summary>
+    private void ClockTick(object sender, EventArgs e)
+    {   
         int seconds = DateTime.Now.Second;
         int minutes = DateTime.Now.Minute;
         int hours = DateTime.Now.Hour;
-
-        (int, int) handCoordinates;
-
+        (int, int) handCoordinates = (0, 0);
         Graphics graphics = picture.CreateGraphics(); 
 
-        // Стираем предыдущее положения секундной стрелки
-        handCoordinates = minuteSecondCoordinates(seconds, secondHand + 4);
+        // Стирает предыдущее положения секундной стрелки
+        handCoordinates = MinuteOrSecondCoordinates(seconds, secondHandLength + 4);
         graphics.DrawLine(new Pen(Color.White, 45f), new Point(center.x, center.y), new Point(handCoordinates.Item1, handCoordinates.Item2));
 
-        // Стираем предыдущее положение минутной стрелки
-        handCoordinates = minuteSecondCoordinates(minutes, minuteHand + 4);
+        // Стирает предыдущее положение минутной стрелки
+        handCoordinates = MinuteOrSecondCoordinates(minutes, minuteHandLength + 4);
         graphics.DrawLine(new Pen(Color.White, 40f), new Point(center.x, center.y), new Point(handCoordinates.Item1, handCoordinates.Item2));
 
-        // Стираем предыдущее положение часовой стрелки
-        handCoordinates = hourCoordinates(hours % 12, minutes, hourHand + 4);
+        // Стирает предыдущее положение часовой стрелки
+        handCoordinates = HourCoordinates(hours % 12, minutes, hourHandLength + 4);
         graphics.DrawLine(new Pen(Color.White, 20f), new Point(center.x, center.y), new Point(handCoordinates.Item1, handCoordinates.Item2));
 
 
-        //Отрисовка стрелки часов.
-        handCoordinates = hourCoordinates(hours % 12, minutes, hourHand);
+        //Отрисовка стрелки часов
+        handCoordinates = HourCoordinates(hours % 12, minutes, hourHandLength);
         graphics.DrawLine(new Pen(Color.Gray, 4f), new Point(center.x, center.y), new Point(handCoordinates.Item1, handCoordinates.Item2));
 
 
         //Отрисовка минутной стрелки
-        handCoordinates = minuteSecondCoordinates(minutes, minuteHand);
+        handCoordinates = MinuteOrSecondCoordinates(minutes, minuteHandLength);
         graphics.DrawLine(new Pen(Color.Black, 2f), new Point(center.x, center.y), new Point(handCoordinates.Item1, handCoordinates.Item2));
 
-        // Отрисовка секундной стрелки.
-        handCoordinates = minuteSecondCoordinates(seconds, secondHand);
+        // Отрисовка секундной стрелки
+        handCoordinates = MinuteOrSecondCoordinates(seconds, secondHandLength);
         graphics.DrawLine(new Pen(Color.DarkOrange, 2f), new Point(center.x, center.y), new Point(handCoordinates.Item1, handCoordinates.Item2));
     }
 }
-
